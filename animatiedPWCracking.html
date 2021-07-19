@@ -1,0 +1,42 @@
+<DOCTYPE HTML>
+<html lang="en">
+<head>
+	<title>
+		 Passwords
+	</title>
+	<meta charset="utf-8">
+</head>
+	<input type="password" placeholder="Enter 2 Character Lowercase Password" id="psw" required>
+    <button type="submit" onclick="crack()">Get Cracking</button> <br>
+	Testing: <span id="number1"> </span> <br>
+	<span id="number2"> </span>
+</html>
+
+<script>
+	var results = [];
+	function crack() {
+		var letters = "abcdefghijklmnopqrstuvwxyz";
+		results = [];
+		for (var letter1 of letters) {
+			for (var letter2 of letters) {
+				results.push( letter1 + letter2);
+			}
+		}
+		var password = document.getElementById("psw").value;
+		update(password)
+	}
+	
+	function update(password){
+		var checking = results[0]
+		document.getElementById("number1").innerHTML = checking;
+		if (checking == password) {
+			document.getElementById("number2").innerHTML = "Your password is " + checking;
+		}
+		results.shift(password);
+		setTimeout(function() {
+			if (results.length > 0 && checking != password) {
+				update(password);
+			}
+		}, 5)
+	}
+</script>

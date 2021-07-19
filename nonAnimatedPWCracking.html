@@ -1,0 +1,35 @@
+<DOCTYPE HTML>
+<html lang="en">
+<head>
+	<title>
+		 Passwords
+	</title>
+	<meta charset="utf-8">
+</head>
+	<input type="password" placeholder="Enter Lowercase Password" id="psw" required>
+    <button type="submit" onclick="crack()" id="button">Get Cracking</button> <br>
+</html>
+
+<script>
+	function crack() {
+		document.getElementById("button").disabled = true;
+		var input = document.getElementById("psw").value;
+		var done = false;
+		var maxLength = 8;
+		var letterDB = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+
+		function recursion (str) {
+		   for (var i=0; i < letterDB.length; i++) {
+			  var test = str+letterDB[i];
+			  if (test !== input && !done && str.length < maxLength) {
+				 recursion(test);
+			  } else if (test === input) {
+				 done = true;
+				 alert("your pass is "+test);
+			  }
+		   }
+		}
+		recursion("");
+		document.getElementById("button").disabled = false;
+	}
+</script>
